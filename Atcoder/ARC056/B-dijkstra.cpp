@@ -45,16 +45,45 @@ typedef unsigned long long ULL;
 
 using namespace std;
 
+vector<vector<LL> > mp; //mp[i]にi地点から行ける場所
+vector<bool> used;  //訪問済みならtrue
+vector<LL> dis; //dis[i]にi地点まで来るのに使った数値最大の道
+void dijkstra(LL s){
+    dis[s]=s;
+    priority_queue<pair<LL,LL> > q; //dis,地点
+    q.push(MP(s,s));
+    while(!q.empty()){
+        LL qd=q.top().first,qp=q.top().second;
+        q.pop();
+        if(used[qp]) continue;
+        used[qp]=true;
+        REP(i,mp[qp].size()){
+            LL nxt=mp[qp][i];
+            LL d=min(nxt,dis[qp]);
+            if(dis[nxt]<d){
+                dis[nxt]=d; q.push(MP(d,nxt));
+            }
+        }
+    }
+    return;
+}
+
+
 int main(){
     LL N,M,S; cin>>N>>M>>S;
     S--;
     vector<LL> u(M),v(M);
-    vector<vector<LL> > mp(N);
+    mp=vector<vector<LL> >(N);
+    used=vector<bool>(N,false);
+    dis=vector<LL>(N,INT_MIN);
     REP(i,M){
         scanf("%d %d",&u[i],&v[i]);
         u[i]--;v[i]--;
         mp[u[i]].push_back(v[i]);
         mp[v[i]].push_back(u[i]);
     }
-    
+    dijkstra(S);
+    REP(i,dis.size()){
+        if(i<=dis[i]) printf("%ld\n",i+1);
+    }
 }

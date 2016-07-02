@@ -46,11 +46,9 @@ typedef unsigned long long ULL;
 using namespace std;
 
 int main(){
-    long n,m; cin>>n>>m;
-    vector<long> u(m),v(m);
-    
-    REP(i,m){
-        cin>>u[i]>>v[i];
-    }
-
+    int a,b; cin>>a>>b;
+    b-=a;
+    if(b>0) cout<<"+"<<b<<endl;
+    else if(b<0) cout<<b<<endl;
+    else cout<<0<<endl;
 }

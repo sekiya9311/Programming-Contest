@@ -46,11 +46,10 @@ typedef unsigned long long ULL;
 using namespace std;
 
 int main(){
-    long n,m; cin>>n>>m;
-    vector<long> u(m),v(m);
-    
-    REP(i,m){
-        cin>>u[i]>>v[i];
-    }
-
+    LL H,W,N,K;
+    cin>>H>>W>>N>>K;
+    LL hw=H+W-1;
+    hw%=N;
+    if(hw==K||(hw==0&&N==K)) cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }

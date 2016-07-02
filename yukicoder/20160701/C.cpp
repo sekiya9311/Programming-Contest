@@ -32,6 +32,9 @@
 #define MOD 1000000007
 #define PI acos(-1.0)
 #define DEBUG(C) cout<<C<<endl;
+#define VI vector<int>
+#define VL vector<long>
+#define VD vector<double>
 #define PII pair<int,int>
 #define PLL pair<long,long>
 #define ALL(a) (a).begin(),(a).end()
@@ -39,6 +42,7 @@
 #define RSORT(a) sort((a).begin(),(a).end(),greater<int>())
 #define MP(a,b) make_pair(a,b)
 #define FORE(a,b) for(auto &&a:b)
+#define INF 1e9
 
 typedef long long LL;
 typedef unsigned long long ULL;
@@ -62,34 +66,18 @@ int main(){
     cin>>M>>N;
     C=vector<int>(N);
     REP(i,N) cin>>C[i];
-    SORT(C);
-    int num=0;
-    dp.push_back(0);
-    while(num<=M){
-        num+=*C.begin();
-        dp.push_back(num);
-    }
-    set<int> p;
-    while(1){
-        int buf=ans; bool f=true;
-        REP(i,C.size()){
-            int m=M-dp[i]-C[i]; if(m>=0) f=false;
-            if(isPrime(m)&&(p.find(m)==p.end())){
-                ans+=i; i==C.size(); p.insert(m);
-            }
-        }
-        if(ans==buf){
-            if(f){
-                cout<<ans<<endl; return 0;
-            }else{
-                bool f=true;
-                REP(i,C.size()) if(C[i]>M){
-                    ans+=(i-1); i=C.size(); M-=dp[i]; f=false;
-                }
-                if(f){
-                    ans+=dp.size()-1; M-=dp.back();
-                }
-            }
+    dp=vector<int>(M+1,-INF);
+    dp[M]=0;
+    REP(i,N){
+        RREP(j,M-C[i]+1){
+            dp[j]=max(dp[j],dp[j+C[i]]+1);
         }
     }
+    int ans=0;
+    RREP(i,M+1){
+        //DEBUG(ans)
+        if(isPrime(i)&&dp[i]>0) ans+=dp[i];
+    }
+    SORT(dp);
+    ans+=dp.back(); cout<<ans<<endl;
 }

@@ -50,6 +50,8 @@ typedef unsigned long long ULL;
 const int INF=1e9;
 const int MOD=INF+7;
 
+//http://codeforces.com/contest/697/submission/19130749
+
 map<pair<LL,LL>,LL> mp;
 
 void mpset(LL v,LL u,LL w){

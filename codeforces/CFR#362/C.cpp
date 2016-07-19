@@ -33,8 +33,11 @@
 #define PI acos(-1.0)
 #define DEBUG(C) cout<<C<<endl;
 #define VI vector<int>
+#define VII vector<VI>
 #define VL vector<long>
+#define VLL vector<VL>
 #define VD vector<double>
+#define VDD vector<VD>
 #define PII pair<int,int>
 #define PDD pair<double,double>
 #define PLL pair<long,long>
@@ -54,32 +57,27 @@ const int MOD=INF+7;
 
 map<pair<LL,LL>,LL> mp;
 
+void DEB(LL a,LL b){cout<<a<<" "<<b<<endl;}
+
+//mapに値をセット
 void mpset(LL v,LL u,LL w){
     LL sml=min(v,u),big=max(v,u);
     auto p=MP(sml,big);
-    if(mp.find(p)!=mp.end()){
-        mp[p]+=w;
-    }else{
-        mp[p]=w;
-    }
+    mp[p]+=w;
 }
 
+//mapから値を得る
 LL mpget(LL v,LL u){
     LL sml=min(v,u),big=max(v,u);
     auto p=MP(sml,big);
-    if(mp.find(p)!=mp.end()){
-        return mp[p];
-    }else{
-        return 0;
-    }
+    return mp[p];
 }
 
-void DEB(LL a,LL b){cout<<a<<" "<<b<<endl;}
-
+//経路間の重みの更新
 void make(LL v,LL u,LL w){
     if(v==u) return;
     LL big=max(v,u),sml=min(v,u);
-    DEB(sml,big);
+    //DEB(sml,big);
     if(sml==1 && (big==2 || big==3)){
         mpset(sml,big,w); return;
     }
@@ -92,13 +90,15 @@ void make(LL v,LL u,LL w){
     }
 }
 
+//経路間の重みの総和を得る
 LL get(LL v,LL u){
     if(v==u) return 0;
     LL big=max(v,u),sml=min(v,u);
-    DEB(sml,big);
+    //DEB(sml,big);
     if(big==2 || big==3){
         if(sml==1){
-            return mpget(1,2);
+            //return mpget(1,2); <--ダメ！！
+            return mpget(sml,big);
         }else{
             LL ans=mpget(1,2)+mpget(1,3);
             return ans;
@@ -106,10 +106,10 @@ LL get(LL v,LL u){
     }
     LL ans=0;
     if(big&1){
-        ans+=mpget((big-1)/2,big);
+        ans=mpget((big-1)/2,big);
         return ans+get(sml,(big-1)/2);
     }else{
-        ans+=mpget(big/2,big);
+        ans=mpget(big/2,big);
         return ans+get(sml,big/2);
     }
 }
@@ -121,10 +121,10 @@ int main(void)
         int num; scanf("%d",&num);
         if(num==1){
             LL v,u,w; cin>>v>>u>>w;
-            make(v,u,w); DEBUG("MAKEEND");
+            make(v,u,w); //DEBUG("MAKEEND");
         }else{
             LL v,u; cin>>v>>u;
-            cout<<get(v,u)<<endl; DEBUG("GETEND")
+            cout<<get(v,u)<<endl; //DEBUG("GETEND")
         }
     }
     return 0;

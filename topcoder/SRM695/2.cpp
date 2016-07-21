@@ -45,6 +45,7 @@
 #define SORT(a) sort(ALL(a))
 #define REVERSE(a) reverse(ALL(a))
 #define MP make_pair
+#define EP emplace_back
 #define FORE(a,b) for(auto &&a:b)
 
 using namespace std;
@@ -55,26 +56,28 @@ const int MOD=INF+7;
 
 class BearPasswordAny{
 public:
-
-    string findPassword(vector <int> x){
+    string findPassword(vector<int> x){
         string ret="";
-        vector<string> vs;
-        if(x[0]!=x.size()) return ret;
-        REP(i,x.size()){
-            if(x[i]>x.size()-i) return ret;
-        }
-        REP(i,x.size()) ret+='a';
         RREP(i,x.size()){
-            if(!x[i]){
-                
+            if(x[i]<0) return "";
+            REP(j,x[i]){
+                if(ret.back()=='a') ret+=str('b',i+1);
+                else ret+=str('a',i+1);
             }
+            REP(j,i) x[j]-=x[i]*(i+1-j);
         }
+        return (ret.size()==x.size())?ret:"";
+    }
+    string str(char c,int n){
+        string ret="";
+        while(n--){ret+=c;}
         return ret;
     }
 };
 
 int main (void){
     BearPasswordAny c;
-    vector<int> x{6,3,1,0,0,0};
-    cout<<c.findPassword(x)<<endl;
+    vector<int> v;
+    int n; while(cin>>n){v.EP(n);}
+    cout<<c.findPassword(v)<<endl;
 }

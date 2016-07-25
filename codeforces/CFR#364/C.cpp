@@ -26,10 +26,10 @@
 #include <sstream>
 #include <fstream>
 
-#define REP(i,n) for(long (i)=0;(i)<(n);(i)++)
-#define FOR(i,a,b) for(long (i)=(a);(i)<(b);(i)++)
-#define RREP(i,a) for(long (i)=(a)-1;(i)>=0;(i)--)
-#define FORR(i,a,b) for(long (i)=(a)-1;(i)>=(b);(i)--)
+#define REP(i,n) for(int (i)=0;(i)<(n);(i)++)
+#define FOR(i,a,b) for(int (i)=(a);(i)<(b);(i)++)
+#define RREP(i,a) for(int (i)=(a)-1;(i)>=0;(i)--)
+#define FORR(i,a,b) for(int (i)=(a)-1;(i)>=(b);(i)--)
 #define PI acos(-1.0)
 #define DEBUG(C) cout<<C<<endl;
 #define VI vector<int>
@@ -45,6 +45,7 @@
 #define SORT(a) sort(ALL(a))
 #define REVERSE(a) reverse(ALL(a))
 #define MP make_pair
+#define EP emplace_back
 #define FORE(a,b) for(auto &&a:b)
 
 using namespace std;
@@ -56,13 +57,20 @@ const int MOD=INF+7;
 int main (void){
     int n; cin>>n;
     string s; cin>>s;
-    int buf=0;
+    int ans=n;
     set<char> sc;
-    map<char,int> mp;
     REP(i,n) sc.insert(s[i]);
-    int ans=n,be=0,ii;
+    map<char,int> mp;
+    int ii=0;
     REP(i,n){
-        
+        while(ii<n && mp.size()<sc.size()){
+            mp[s[ii]]++;
+            ii++;
+        }
+        if(mp.size()<sc.size()) break;
+        ans=min(ans,ii-i);
+        mp[s[i]]--;
+        if(mp[s[i]]==0) mp.erase(s[i]);
     }
     cout<<ans<<endl;
 }

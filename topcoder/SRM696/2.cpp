@@ -53,7 +53,7 @@ typedef unsigned long long ULL;
 const int INF=1e9;
 const int MOD=INF+7;
 
-/*Success!!*/
+/*Not Success!!*/
 class Arrfix{
 public:
     int mindiff(vector <int> A, vector <int> B, vector <int> F){

@@ -53,7 +53,23 @@ typedef long long LL;
 typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF+7;
-
-int main(void) {
-
+const LL LLINF = 1e18;
+#define int LL
+signed main(void) {
+    int N, x;
+    cin >> N >> x;
+    VL a(N);
+    REP (i, N) cin >> a[i];
+    LL ans = accumulate(ALL(a), 0LL);
+    VL b(a);
+    FOR (k, 1, N) {
+        LL sum = k*x;
+        REP (i, N) {
+            int id = (i-k+N)%N;
+            b[i] = min(b[i], a[id]);
+            sum += b[i];
+        }
+        ans = min(ans, sum);
+    }
+    cout << ans << endl;
 }

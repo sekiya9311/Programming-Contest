@@ -58,28 +58,16 @@ const int MOD=INF+7;
 const int NUM = (50*50)+1;
 int N,A;
 VI x;
-LL dp[51][51][NUM]={0};
+VI xsub;
+LL dp[51][NUM*2]={0};
 
 signed main(void){
     cin >> N >> A;
     x=VI(N);
+    xsub=VI(N);
     REP(i,N){
         cin >> x[i];
+        xsub[i]=x[i]-A;
     }
-    dp[0][0][0]=1;
-    //先頭からi個の内，j個選んだ組み合わせで総和kが何通りか
-    REP(i,N){
-        REP(j,i+1){
-            REP(k,NUM){
-                dp[i+1][j][k]+=dp[i][j][k]; //x[i]を候補に追加して使用しなかった場合
-                dp[i+1][j+1][k+x[i]]+=dp[i][j][k]; //x[i]を候補に追加して使用した場合
-            }
-        }
-    }
-    LL ans=0;
-    //先頭からN個のうち，ave==(i*A)/i==A
-    FOR(i,1,N+1){
-        ans+=dp[N][i][i*A];
-    }
-    cout << ans << endl;
+    //i個選んで総和がj-NA
 }

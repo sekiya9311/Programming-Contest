@@ -53,7 +53,13 @@ typedef long long LL;
 typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF+7;
-
-int main(void) {
-
+#define int LL
+signed main(void) {
+    int A, B, C;
+    cin >> A >> B >> C;
+    if ((A*B*C)%2 == 0) {
+        cout << 0 << endl;
+        return 0;
+    }
+    cout << min({A*B, B*C, C*A}) << endl;
 }

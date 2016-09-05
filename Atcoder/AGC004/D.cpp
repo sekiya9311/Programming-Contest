@@ -55,5 +55,4 @@ const int INF = 1e9;
 const int MOD = INF+7;
 
 int main(void) {
-
 }

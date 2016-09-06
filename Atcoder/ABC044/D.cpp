@@ -53,7 +53,36 @@ typedef long long LL;
 typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF+7;
+const LL LLINF = 1e18;
+#define int LL
+LL n, s;
+LL f(LL b, LL n) {
+    if (n < b) return n;
+    else return f(b, floor((double)n/(double)b))+(n%b);
+}
 
-int main(void) {
-
+signed main(void) {
+    cin >> n >> s;
+    if (n < s) {
+        cout << -1 << endl;
+        return 0;
+    }
+    if (n == s) {
+        cout << n+1 << endl;
+        return 0;
+    }
+    LL ans = LLINF;
+    for (int i = 2; i*i <= n; i++) {
+        if (f(i, n) == s) {
+            ans = min<LL>(ans, i);
+        }
+    }
+    for (int i = 1; i*i <= n; i++) {
+        if ((n-s)%i) continue;
+        LL b = ((n-s)/i)+1;
+        if (f(b, n) == s) {
+            ans = min(ans, b);
+        }
+    }
+    cout << (ans!=LLINF?ans:(-1)) << endl;
 }

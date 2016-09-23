@@ -58,26 +58,27 @@ const int MOD = INF+7;
 const LL LLINF = 1e14;
 #define int LL
 
-/** NOT AC **/
-
 LL n, m, L, s, t;
-vector<VPII> graph_min, graph_max;
+vector<VPII> graph_min, graph_max, graph_m;
 
-LL dijkstra(const vector<VPII> &graph) {
+LL dijkstra(vector<VPII> graph) {
     LL res = LLINF;
     vector <LL> minCost(n, LLINF);
+    minCost[s] = 0;
     priority_queue<PLL, vector<PLL>, greater<PLL>> q;
     q.push(MP(0, s));
     while(!q.empty()) {
         auto now = q.top(); q.pop();
         LL pos = now.second, cost = now.first;
         if (pos == t) {
-            return cost;
+            res = min(res, cost);
         }
-        if (minCost[pos] == LLINF) minCost[pos] = cost;
-        else continue;
         FORE(el, graph[pos]) {
-            q.push(MP(el.second + cost, el.first));
+            LL nxtCost = el.second + cost;
+            LL nxtPnt = el.first;
+            if (minCost[nxtPnt] <= nxtCost) continue;
+            minCost[nxtPnt] = nxtCost;
+            q.push(MP(nxtCost, nxtPnt));
         }
     }
     return res;
@@ -101,27 +102,28 @@ signed main(void) {
     }
     LL ret_min = dijkstra(graph_min);
     LL ret_max = dijkstra(graph_max);
-    if (L < ret_min || ret_max < L) {
+    if (!(ret_min <= L && L <= ret_max)) {
         cout << "NO" << endl;
         return 0;
     }
+    graph_m = graph_max;
     PII ansp = MP(0, 0);
     LL ansc = 0;
     set<PII> se;
     if (L < ret_max) FORE(p, zero) {
-        FORE(el, graph_max[p.first]) {
+        FORE(el, graph_m[p.first]) {
             if (el.first == p.second) {
                 el.second = 1;
                 break;
             }
         }
-        FORE(el, graph_max[p.second]) {
+        FORE(el, graph_m[p.second]) {
             if (el.first == p.first) {
                 el.second = 1;
                 break;
             }
         }
-        LL ret = dijkstra(graph_max);
+        LL ret = dijkstra(graph_m);
         if (ret <= L) {
             ansp = p;
             ansc = 1 + L - ret;

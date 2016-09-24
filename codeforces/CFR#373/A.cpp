@@ -56,5 +56,39 @@ typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF + 7;
 
+VI N{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1,
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+VI a;
+
 int main(void) {
+    int n; cin >> n;
+    a.resize(n);
+    REP(i, n) cin >> a[i];
+    if (n == 1) {
+        if (!(a[0] == 0 || a[0] == 15)) {
+            cout << -1 << endl;
+        } else {
+            if (a[0] == 0) {
+                cout << "UP" << endl;
+            } else {
+                cout << "DOWN" << endl;
+            }
+        }
+        return 0;
+    }
+    int aa = a.back();
+    int aaa = a[n - 2];
+    if (aa > aaa) {
+        if (aa == 15) {
+            cout << "DOWN" << endl;
+        } else {
+            cout << "UP" << endl;
+        }
+    } else {
+        if (aa == 0) {
+            cout << "UP" << endl;
+        } else {
+            cout << "DOWN" << endl;
+        }
+    }
 }

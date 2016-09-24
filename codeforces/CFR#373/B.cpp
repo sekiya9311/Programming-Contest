@@ -56,5 +56,25 @@ typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF + 7;
 
+int cnt(string s, char fst) {
+    int cnt = 0;
+    char c[2];
+    if (fst == 'r') {
+        c[0] = 'r';
+        c[1] = 'b';
+    } else {
+        c[0] = 'b';
+        c[1] = 'r';
+    }
+    int ccnt[2];REP(i,2)ccnt[i]=0;
+    REP(i, s.size()) {
+        if (s[i] != c[i%2]) ccnt[i%2]++;
+    }
+    return max(ccnt[0],ccnt[1]);
+}
+
 int main(void) {
+    int n; cin >> n;
+    string s; cin >> s;
+    cout << min(cnt(s, 'r'), cnt(s, 'b')) << endl;
 }

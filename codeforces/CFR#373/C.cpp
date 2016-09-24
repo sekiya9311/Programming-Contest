@@ -56,5 +56,12 @@ typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF + 7;
 
+/* NOT AC */
+
 int main(void) {
+    int n, t;
+    cin >> n >> t;
+    string d; cin >> d;
+    double dnum = stod(d);
+
 }

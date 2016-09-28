@@ -42,7 +42,7 @@
 #define PDD pair <double, double>
 #define PLL pair <LL, LL>
 #define VPII vector <PII>
-#define ALL(a) ((a).begin(), (a).end())
+#define ALL(a) (a).begin(), (a).end()
 #define SORT(a) sort(ALL(a))
 #define REVERSE(a) reverse(ALL(a))
 #define MP make_pair

@@ -46,7 +46,7 @@
 #define SORT(a) sort(ALL(a))
 #define REVERSE(a) reverse(ALL(a))
 #define MP make_pair
-#define EB emplace_back
+#define EP emplace_back
 #define FORE(a, b) for (auto &&a:b)
 #define FIND(s, n) (s.find(n) != s.end())
 
@@ -56,5 +56,8 @@ typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF + 7;
 
+/* NOT AC */
+
 int main(void) {
+
 }

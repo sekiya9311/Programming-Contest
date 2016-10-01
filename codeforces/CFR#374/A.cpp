@@ -57,4 +57,37 @@ const int INF = 1e9;
 const int MOD = INF + 7;
 
 int main(void) {
+    int n;
+    string s;
+    cin >> n;
+    cin >> s;
+    int num = 0;
+    VI ans;
+    bool f = false;
+    int cnt = 0;
+    REP(i, s.size()) {
+        if (s[i] == 'W') {
+            if (f) {
+                ans.EB(cnt);
+                num++;
+            }
+            cnt = 0; f = false;
+        } else {
+            if (f) cnt++;
+            else {
+                f = true;
+                cnt++;
+            }
+        }
+    }
+    if (s.back() == 'B') {
+        ans.EB(cnt);
+        num++;
+    }
+    cout << num << endl;
+    REP(i, ans.size()) {
+        cout << ans[i];
+        if (i != ans.size() - 1) cout << " ";
+        else cout << endl;
+    }
 }

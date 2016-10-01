@@ -56,5 +56,48 @@ typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF + 7;
 
+bool comp(const string& left, const string& right) {
+    return left.size() < right.size();
+}
+
+void out(const vector <string>& v) {
+    FORE(el, v) cout << el << endl;
+}
+
 int main(void) {
+    int n, k;
+    cin >> n >> k;
+    vector <string> ps(n);
+    REP(i, n) cin >> ps[i];
+    string vps; cin >> vps;
+    int mintime = 0, maxtime = 0;
+    int time = 0;
+    sort(ALL(ps), comp);
+    int cnt = 0;
+    bool f = false;
+    REP(i, n) {
+        if (ps[i].size() < vps.size()) {
+            cnt++; time++;
+            if (cnt == k) {
+                time += 5; cnt = 0;
+            }
+        } else if (ps[i].size() == vps.size()) {
+            time++; cnt++;
+            if (!f) {
+                mintime = time;
+            }
+            f = true;
+            if (i == n - 1) {
+                maxtime = time;break;
+            }
+            if (cnt == k) {
+                time += 5; cnt = 0;
+            }
+        } else {
+            if (cnt) maxtime = time;
+            else maxtime = time - 5;
+            break;
+        }
+    }
+    cout << mintime << " " << maxtime << endl;
 }

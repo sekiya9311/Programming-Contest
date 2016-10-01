@@ -56,5 +56,58 @@ typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF + 7;
 
+/* NOT AC  */
+
+int n, m, T;
+VI graph[5010];
+int cost[5010][5010];
+set <int> muri;
+
+list <int> dfs(int nowPoint, int nowCost) {
+    list <int> res;
+    if (nowPoint == n - 1) {
+        res.emplace_front(nowPoint);
+        return res;
+    }
+    FORE(el, graph[nowPoint]) {
+        if (FIND(muri, el)) continue;
+        int reCost = nowCost + cost[nowPoint][el];
+        if (reCost > T) continue;
+        auto buf = dfs(el, reCost);
+        if (buf.size() && buf.back() != n - 1) {
+            muri.insert(el);
+            continue;
+        } else if (buf.size() == 0) {
+            continue;
+        }
+        if (res.size() < buf.size()) {
+            res = buf;
+        }
+    }
+    if (res.size() && res.back() != n - 1) {
+        muri.insert(nowPoint);
+        res.clear();
+    } else if (res.size() && res.back() == n - 1) {
+        res.emplace_front(nowPoint);
+    } else if (res.size() == 0) {
+        muri.insert(nowPoint);
+    }
+    return res;
+}
+
 int main(void) {
+    scanf("%d%d%d", &n, &m, &T);
+    REP(i, m) {
+        int a, b, c;
+        scanf("%d%d%d", &a, &b, &c);
+        a--;b--;
+        graph[a].EB(b);
+        cost[a][b] = c;
+    }
+    auto ans = dfs(0, 0);
+    cout << ans.size() << endl;
+    FORE(el, ans) {
+        printf("%d ", el + 1);
+    }
+    printf("\n");
 }

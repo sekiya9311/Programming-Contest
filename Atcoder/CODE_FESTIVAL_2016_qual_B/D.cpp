@@ -56,17 +56,22 @@ typedef unsigned long long ULL;
 const int INF = 1e9;
 const int MOD = INF + 7;
 
-/* NOT AC */
-int N;
-VI A;
-
 int main(void) {
-    cin >> N;
-    A.resize(N);
+    int N; cin >> N;
+    VI A(N);
     REP(i, N) scanf("%d", &A[i]);
-    LL cnt = 0;
-    REP(i, N) {
-
+    int minnum = 2;
+    LL ans = A[0] - 1;
+    FOR(i, 1, N) {
+        if (A[i] == minnum) {
+            minnum++;
+            continue;
+        }
+        if (A[i] % minnum == 0) {
+            ans += (A[i] / minnum) - 1;
+        } else {
+            ans += A[i] / minnum;
+        }
     }
-    cout << cnt << endl;
+    cout << ans << endl;
 }

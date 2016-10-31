@@ -54,9 +54,34 @@ using VPII = vector<PII>;
 #define EB emplace_back
 
 const int INF = 1e9;
-const int MOD = INF + 7;
+const int MOD = INF+7;
 const LL LLINF = 1e18;
 
-int main(void) {
+int N;
+VPII p;
 
+int main(void) {
+    cin >> N;
+    p.resize(N);
+    int lsum = 0, rsum = 0;
+    REP(i, N) {
+        int l, r;
+        scanf("%d%d", &l, &r);
+        p[i] = MP(l, r);
+        lsum += l;
+        rsum += r;
+    }
+    int ans = abs(lsum - rsum);
+    int out = 0;
+    REP(i, N) {
+        int lsb = lsum;
+        int rsb = rsum;
+        lsb = lsb - p[i].first + p[i].second;
+        rsb = rsb - p[i].second + p[i].first;
+        if (ans < abs(lsb - rsb)) {
+            out = i + 1;
+            ans = abs(lsb - rsb);
+        }
+    }
+    cout << out << endl;
 }

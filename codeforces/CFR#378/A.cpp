@@ -54,9 +54,27 @@ using VPII = vector<PII>;
 #define EB emplace_back
 
 const int INF = 1e9;
-const int MOD = INF + 7;
+const int MOD = INF+7;
 const LL LLINF = 1e18;
 
 int main(void) {
+    string s;
 
+    cin >> s;
+    s =s + "A";
+    set<char> se;
+    FORE(el, "AIUEOY") {
+        se.insert(el);
+    }
+    int ans = 1;
+    int num = 1;
+    FORE(el, s) {
+        if (FIND(se, el)) {
+            ans = max(ans, num);
+            num = 1;
+        } else {
+            num++;
+        }
+    }
+    cout << ans << endl;
 }

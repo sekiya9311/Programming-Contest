@@ -26,34 +26,36 @@
 #include <sstream>
 #include <fstream>
 
+using namespace std;
 #define REP(i, n) for (int (i) = 0; (i) < (n); (i)++)
 #define FOR(i, a, b) for (int (i) = (a); (i) < (b); (i)++)
-#define RREP(i, a) for (int (i) = (a) - 1; (i) >= 0; (i)--)
-#define FORR(i, a, b) for (int (i) = (a) - 1; (i) >= (b); (i)--)
-#define PI acos(-1.0)
-#define DEBUG(C) cout<< C <<endl;
-#define VI vector <int>
-#define VII vector <VI>
-#define VL vector <LL>
-#define VLL vector <VL>
-#define VD vector <double>
-#define VDD vector <VD>
-#define PII pair <int, int>
-#define PDD pair <double, double>
-#define PLL pair <LL, LL>
-#define VPII vector <PII>
-#define ALL(a) (a).begin(), (a).end()
-#define SORT(a) sort(ALL(a))
-#define REVERSE(a) reverse(ALL(a))
+#define RREP(i, a) for(int (i) = (a) - 1; (i) >= 0; (i)--)
+#define FORR(i, a, b) for(int (i) = (a) - 1; (i) >= (b); (i)--)
+#define DEBUG(C) cerr << #C << " = " << C << endl;
+using LL = long long;
+using VI = vector<int>;
+using VVI = vector<VI>;
+using VL = vector<LL>;
+using VVL = vector<VL>;
+using VD = vector<double>;
+using VVD = vector<VD>;
+using PII = pair<int, int>;
+using PDD = pair<double, double>;
+using PLL = pair<LL, LL>;
+using VPII = vector<PII>;
+template<typename T> using VT = vector<T>;
+#define ALL(a) begin((a)), end((a))
+#define RALL(a) rbegin((a)), rend((a))
+#define SORT(a) sort(ALL((a)))
+#define RSORT(a) sort(RALL((a)))
+#define REVERSE(a) reverse(ALL((a)))
 #define MP make_pair
+#define FORE(a, b) for (auto &&a : (b))
+#define FIND(s, e) ((s).find(e) != (s).end())
 #define EB emplace_back
-#define FORE(a, b) for (auto &&a:b)
-#define FIND(s, n) (s.find(n) != s.end())
 
-using namespace std;
-typedef long long LL;
-typedef unsigned long long ULL;
 const int INF = 1e9;
+const LL LLINF = 1e18;
 
 ${<if Problem.Description.Modulo}
 static const int mod = ${Problem.Description.Modulo};

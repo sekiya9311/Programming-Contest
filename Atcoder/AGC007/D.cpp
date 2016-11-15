@@ -43,7 +43,6 @@ using PII = pair<int, int>;
 using PDD = pair<double, double>;
 using PLL = pair<LL, LL>;
 using VPII = vector<PII>;
-template<typename T> using VT = vector<T>;
 #define ALL(a) begin((a)), end((a))
 #define RALL(a) rbegin((a)), rend((a))
 #define SORT(a) sort(ALL((a)))
@@ -58,6 +57,24 @@ const int INF = 1e9;
 const int MOD = INF + 7;
 const LL LLINF = 1e18;
 
-int main(void) {
+/** TLE **/
 
+int N, E, T;
+VI x;
+
+int main(void) {
+    scanf("%d%d%d", &N, &E, &T);
+    x.resize(N);
+    assert(N <= 2000);
+    for_each(ALL(x), [](int &e){scanf("%d", &e);});
+    VL dp(N + 1, LLINF);
+    //dp[i] = i - 1番目までを収穫する最小時間からEを引いたやつ
+    dp[0] = 0;
+    REP(i, N) {
+        FOR(j, i, N) {
+            int dis = x[j] - x[i];
+            dp[j + 1] = min(dp[j + 1], dp[i] + max(T, dis * 2));
+        }
+    }
+    cout << dp[N] + E << endl;
 }

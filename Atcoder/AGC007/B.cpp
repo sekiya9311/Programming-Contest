@@ -43,7 +43,6 @@ using PII = pair<int, int>;
 using PDD = pair<double, double>;
 using PLL = pair<LL, LL>;
 using VPII = vector<PII>;
-template<typename T> using VT = vector<T>;
 #define ALL(a) begin((a)), end((a))
 #define RALL(a) rbegin((a)), rend((a))
 #define SORT(a) sort(ALL((a)))
@@ -57,7 +56,39 @@ template<typename T> using VT = vector<T>;
 const int INF = 1e9;
 const int MOD = INF + 7;
 const LL LLINF = 1e18;
-
-int main(void) {
-
+bool check(int n) {
+    return 1 <= n && n <= INF;
+}
+signed main(void) {
+    int N; cin >> N;
+    VI p(N);
+    for_each(ALL(p), [](int &e){scanf("%d", &e);});
+    VI a(N), b(N);
+    VI sum(N);
+    REP(i, N) {
+        sum[p[i] - 1] = INF - N + i - 1;
+    }
+    int cnt = 0;
+    REP(i, N) {
+        a[i] = i + 1 + cnt;
+        b[i] = sum[i] - a[i];
+        if (i == 0) continue;
+        if (a[i] <= a[i - 1]) {
+            int buf = a[i - 1] - a[i] + 1;
+            a[i] += buf;
+            b[i] -= buf;
+            cnt += buf;
+        }
+        if (b[i] >= b[i - 1]) {
+            int buf = b[i] - b[i - 1] + 1;
+            a[i] += buf;
+            b[i] -= buf;
+            cnt += buf;
+        }
+        assert(check(a[i]) && check(b[i]));
+    }
+    for_each(ALL(a), [](int e){printf("%d ", e);});
+    printf("\n");
+    for_each(ALL(b), [](int e){printf("%d ", e);});
+    printf("\n");
 }

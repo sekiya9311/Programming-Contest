@@ -53,11 +53,12 @@ template<typename T> using VT = vector<T>;
 #define FORE(a, b) for (auto &&a : (b))
 #define FIND(s, e) ((s).find(e) != (s).end())
 #define EB emplace_back
+template<typename T> bool chmax(T &a, T b){if (a < b){a = b;return true;}return false;}
+template<typename T> bool chmin(T &a, T b){if (a > b){a = b;return true;}return false;}
 
 const int INF = 1e9;
 const int MOD = INF + 7;
 const LL LLINF = 1e18;
 
 int main(void) {
-
 }

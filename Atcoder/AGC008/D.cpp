@@ -25,7 +25,7 @@
 #include <tuple>
 #include <sstream>
 #include <fstream>
-
+ 
 using namespace std;
 #define REP(i, n) for (int (i) = 0; (i) < (n); (i)++)
 #define FOR(i, a, b) for (int (i) = (a); (i) < (b); (i)++)
@@ -53,63 +53,68 @@ template<typename T> using VT = vector<T>;
 #define FORE(a, b) for (auto &&a : (b))
 #define FIND(s, e) ((s).find(e) != (s).end())
 #define EB emplace_back
-
+ 
 const int INF = 1e9;
 const int MOD = INF + 7;
 const LL LLINF = 1e18;
-
-//NOT AC
-
-int N;
-VPII X;
+ 
+int N, NN;
+VI a;
 VI ans;
+VPII vp;
 VI nokori;
-VI cnt;
-
+ 
 int main(void) {
     scanf("%d", &N);
-    X.resize(N);
-    const int NN = N * N;
-    ans.resize(NN);
+    NN = N * N;
+    a.resize(N);
+    ans.resize(NN, 0);
+    for_each(ALL(a), [](int &e){scanf("%d", &e);});
+    vp.resize(N);
     nokori.resize(N);
-    cnt.resize(N, 0);
-    REP(i, N) {
-        scanf("%d", &X[i].first);
-        X[i].first--;
-        X[i].second = i + 1;
-        nokori[i] = i + 1;
-    }
-    RSORT(X);
-    int nowxid = N - 1, nowcntid = 0;
+    fill(ALL(nokori), N);
+    REP(i, N) vp[i] = MP(a[i] - 1, i);
+    RSORT(vp);
+    int nowfreeid = N - 1, nowid = N - 1;
+    bool free = false;
     REP(i, NN) {
-        if (X.back().first == i) {
-            if (nokori[X.back().second - 1] != 1) {
+        if (vp[nowid].first == i) {
+            if (nokori[vp[nowid].second] == N - (vp[nowid].second)) {
+                ans[i] = vp[nowid].second;
+                nokori[vp[nowid].second]--;
+                nowid--;
+            } else {
+                //FORE(e, ans) cout << e+1 << " ";cout<<endl;
                 cout << "No" << endl;
                 return 0;
             }
-            cnt[X.back().second - 1]++;
-            ans[i] = X.back().second;
-            nokori[X.back().second - 1]--;
-            X.pop_back();
         } else {
-            while (nokori[X[nowxid].second - 1] <= 1  && nowxid >= 0) nowxid--;
-            if (nowxid != -1) {
-                ans[i] = X[nowxid].second;
-                nokori[X[nowxid].second - 1]--;
-                cnt[X[nowxid].second - 1]++;
-            } else {
-                while (cnt[nowcntid] == N && nowcntid < N) nowcntid++;
-                if (nowcntid == N) {
+            if (free) {
+                while (nokori[vp[nowfreeid].second] == 0) {
+                    nowfreeid--;
+                }
+                if (nowfreeid <= nowid) {
                     cout << "No" << endl;
                     return 0;
                 }
-                cnt[nowcntid]++;
-                ans[i] = nowcntid + 1;
+                ans[i] = vp[nowfreeid].second;
+                nokori[vp[nowfreeid].second]--;
+            } else {
+                while (nowfreeid >= 0 && nokori[vp[nowfreeid].second] <= N - (vp[nowfreeid].second)) {
+                    nowfreeid--;
+                }
+                if (nowfreeid == -1) {
+                    free = true;
+                    nowfreeid = N - 1;
+                    i--;
+                    continue;
+                } else {
+                    ans[i] = vp[nowfreeid].second;
+                    nokori[vp[nowfreeid].second]--;
+                }
             }
         }
     }
-    cout << "Yes" << endl;
-    REP(i, NN) {
-        printf("%d%c", ans[i], (i + 1 == NN ? '\n' : ' '));
-    }
+    printf("Yes\n");
+    REP(i, NN) printf("%d%c", ans[i] + 1, (i + 1 == NN ? '\n' : ' '));
 }

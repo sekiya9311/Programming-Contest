@@ -56,8 +56,8 @@ template<typename T> using VT = vector<T>;
 #define FORE(a, b) for (auto &&a : (b))
 #define FIND(s, e) ((s).find(e) != (s).end())
 #define EB emplace_back
-template<typename T> bool chmax(T &a, T b){if (a < b){a = b;return true;}return false;}
-template<typename T> bool chmin(T &a, T b){if (a > b){a = b;return true;}return false;}
+template<typename T> inline bool chmax(T &a, T b){if (a < b){a = b;return true;}return false;}
+template<typename T> inline bool chmin(T &a, T b){if (a > b){a = b;return true;}return false;}
 
 ${<if Problem.Description.Modulo}
 static const int mod = ${Problem.Description.Modulo};

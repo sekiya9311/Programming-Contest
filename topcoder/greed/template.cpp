@@ -25,8 +25,11 @@
 #include <tuple>
 #include <sstream>
 #include <fstream>
+#include <chrono>
+#include <random>
 
 using namespace std;
+
 #define REP(i, n) for (int (i) = 0; (i) < (n); (i)++)
 #define FOR(i, a, b) for (int (i) = (a); (i) < (b); (i)++)
 #define RREP(i, a) for(int (i) = (a) - 1; (i) >= 0; (i)--)
@@ -53,9 +56,8 @@ template<typename T> using VT = vector<T>;
 #define FORE(a, b) for (auto &&a : (b))
 #define FIND(s, e) ((s).find(e) != (s).end())
 #define EB emplace_back
-
-const int INF = 1e9;
-const LL LLINF = 1e18;
+template<typename T> bool chmax(T &a, T b){if (a < b){a = b;return true;}return false;}
+template<typename T> bool chmin(T &a, T b){if (a > b){a = b;return true;}return false;}
 
 ${<if Problem.Description.Modulo}
 static const int mod = ${Problem.Description.Modulo};

@@ -73,7 +73,7 @@ int main(void) {
 	int problemnum;
     scanf("%d", &problemnum);
     //string s;getline(cin, s);
-    for (int testNum = 1; i <= problemnum; testNum++) {
+    for (int testNum = 1; testNum <= problemnum; testNum++) {
         solve(testNum);
         cerr << "Case #" << testNum << ": solved" << endl;
     }

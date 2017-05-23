@@ -62,32 +62,36 @@ const LL LLINF = 1e18;
 
 const int MAX = 3 * 1e5 + 10;
 int N;
-long long a[MAX], l[MAX], r[MAX];
- 
-int main() {
+LL x[MAX], two[MAX];
+LL xdiff[MAX];
+LL a[MAX];
+
+int main(void) {
+    two[0] = 1;
+    REP(i, MAX - 1) {
+        two[i + 1] = (two[i] * 2) % MOD;
+    }
     scanf("%d", &N);
-    for (int i = 0; i < 3 * N; ++i) {
-        scanf("%lld", a + i);
+    REP(i, N) {
+        scanf("%lld", x + i);
     }
-    priority_queue<long long, vector<long long>, greater<long long>> pq;
-    priority_queue<long long> pq2;
-    for (int i = 0; i < N; ++i) {
-        l[0] += a[i];
-        r[0] += a[N * 2 + i];
-        pq.push(a[i]);
-        pq2.push(a[N * 2 + i]);
+    LL ans = 0;
+    sort(x, x + N);
+    // FOR(d, 1, N) {
+    //     for (int i = 0; i + d < N; i++) {
+    //         (ans += ((x[i + d] - x[i]) * two[d - 1]) % MOD) %= MOD;
+    //     }
+    // }
+    // REP(i, N) {
+    //     FOR(d, 1, N) {
+    //         if (d + i < N) {
+    //             (ans += ((x[i + d] - x[i]) * two[d - 1]) % MOD) %= MOD;
+    //         }
+    //     }
+    // }
+    REP(i, N) {
+        (ans += (x[i] * two[i]) % MOD) %= MOD;
+        (ans -= (x[i] * two[N - i - 1] % MOD) - MOD) %= MOD;
     }
-    for (int i = 0; i < N; ++i) {
-        pq.push(a[N + i]);
-        l[i + 1] = l[i] + a[N + i] - pq.top();
-        pq.pop();
-        pq2.push(a[2 * N - i - 1]);
-        r[i + 1] = r[i] + a[2 * N - i - 1] - pq2.top();
-        pq2.pop();
-    }
-    long long ans = -LLINF;
-    for (int i = 0; i <= N; ++i) {
-        ans = max(ans, l[i] - r[N - i]);
-    }
-    printf("%lld\n", ans);
+    cout << ans << endl;
 }

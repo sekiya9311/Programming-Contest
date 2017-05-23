@@ -60,34 +60,28 @@ const int INF = 1e9;
 const int MOD = INF + 7;
 const LL LLINF = 1e18;
 
-const int MAX = 3 * 1e5 + 10;
-int N;
-long long a[MAX], l[MAX], r[MAX];
- 
-int main() {
-    scanf("%d", &N);
-    for (int i = 0; i < 3 * N; ++i) {
-        scanf("%lld", a + i);
+const int MAX = 110;
+int N, K;
+int a[MAX];
+
+int main(void) {
+    scanf("%d%d", &N, &K);
+    long double sum = 0;
+    REP(i, N) {
+        scanf("%d", a + i);
+        sum += a[i];
     }
-    priority_queue<long long, vector<long long>, greater<long long>> pq;
-    priority_queue<long long> pq2;
-    for (int i = 0; i < N; ++i) {
-        l[0] += a[i];
-        r[0] += a[N * 2 + i];
-        pq.push(a[i]);
-        pq2.push(a[N * 2 + i]);
+    if (roundl(sum / N) >= K) {
+        cout << 0 << endl;
+        return 0;
     }
-    for (int i = 0; i < N; ++i) {
-        pq.push(a[N + i]);
-        l[i + 1] = l[i] + a[N + i] - pq.top();
-        pq.pop();
-        pq2.push(a[2 * N - i - 1]);
-        r[i + 1] = r[i] + a[2 * N - i - 1] - pq2.top();
-        pq2.pop();
+    int cnt = 0;
+    while (true) {
+        sum += K;
+        ++cnt;
+        if (roundl(sum / (N + cnt)) >= K) {
+            cout << cnt << endl;
+            return 0;
+        }
     }
-    long long ans = -LLINF;
-    for (int i = 0; i <= N; ++i) {
-        ans = max(ans, l[i] - r[N - i]);
-    }
-    printf("%lld\n", ans);
 }

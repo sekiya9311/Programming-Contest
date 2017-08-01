@@ -70,7 +70,7 @@ int main(void) {
         cerr << "file open failed" << endl;
         exit(1);
     }
-	int problemnum;
+    int problemnum;
     scanf("%d", &problemnum);
     //string s;getline(cin, s);
     for (int testNum = 1; testNum <= problemnum; testNum++) {

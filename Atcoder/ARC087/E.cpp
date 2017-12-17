@@ -135,21 +135,32 @@ int N;
 LL L;
 string s[MAX];
 Trie<int, '0'> trie;
-int cnt[2];
+VL nim;
 
-LL dfs(Trie<int, '0'>::Node *now, int rank = 1) {
-    if (rank - 1 == L) {
-        return 0;
-    }
+// struct Node {
+//     Node *nxt[nxt_size];
+//     T w = 0;
+//     Node() {
+//         for (int i = 0; i < nxt_size; i++) {
+//             nxt[i] = nullptr;
+//         }
+//     }
+// };
+
+LL dfs(Trie<int, '0'>::Node *now, int rank = 0) {
     REP(i, 2) {
-        if (now->nxt[i] == nullptr) {
-            if (rank == L) {
-                cnt[1]++;
-            } else {
-                cnt[0]++;
-            }
-        } else {
+        if (now->nxt[i] != nullptr) {
             dfs(now->nxt[i], rank + 1);
+        } else {
+            if (L - rank == 0) {
+                continue;
+            }
+            for (int b = 0; ; b++) {
+                if ((L - rank) & (1LL << b)) {
+                    nim.EB(1LL << b);
+                    break;
+                }
+            }
         }
     }
     return 0;
@@ -162,10 +173,8 @@ int main(void) {
         s[i] = next();
         trie.insert(s[i], 1);
     }
-    cnt[0] = cnt[1] = 0;
-    LL buf = dfs(trie.getRoot());
-    DEBUG(cnt[0])
-    DEBUG(cnt[1])
-    cout << ((cnt[0] ^ cnt[1]) % 2 ? "Alice" : "Bob") << endl;
-    //cout << (buf % 2 ? "Alice" : "Bob") << endl;
+    dfs(trie.getRoot());
+    LL buf = 0;
+    for_each(ALL(nim), [&](LL e) {buf ^= e;});
+    cout << (buf ? "Alice" : "Bob") << endl;
 }

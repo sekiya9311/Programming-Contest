@@ -66,8 +66,8 @@ LL T;
 int a[MAX], t[MAX];
 pair<PII, int> pa[MAX];// t[i], a[i], idx
 
-set<int> func(int size) {
-    set<int> ret;
+unordered_set<int> func(int size) {
+    unordered_set<int> ret;
     LL tbuf = T;
     FORE(e, pa) {
         int aa = a[e.second];
@@ -81,9 +81,9 @@ set<int> func(int size) {
 }
 
 int main(void) {
-    cin >> n >> T;
+    scanf("%d%lld", &n, &T);
     REP(i, n) {
-        cin >> a[i] >> t[i];
+        scanf("%d%d", a + i, t + i);
         pa[i] =  MP(MP(t[i], a[i]), i);
     }
     sort(pa, pa + n);
@@ -97,9 +97,10 @@ int main(void) {
         }
     }
     auto ans = func(ok);
-    REP(i, 2) cout << ans.size() << endl;
+    printf("%d\n", (int) ans.size());
+    printf("%d\n", (int) ans.size());
     FORE(e, ans) {
-        cout << e << " ";
+        printf("%d ", e + 1);
     }
-    cout << endl;
+    puts("");
 }

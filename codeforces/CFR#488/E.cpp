@@ -126,10 +126,10 @@ int main(void) {
             }
         }
     }
-
+    
     int ans = 0;
     REP(i, cand.size()) {
-        FOR(j, i + 1, cand.size()) {
+        REP(j, cand.size()) {
             chmax(ans, bitCount(xBit[i] | xBit[j]) + bitCount(yBit[i] | yBit[j]));
         }
     }

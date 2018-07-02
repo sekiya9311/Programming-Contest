@@ -102,5 +102,5 @@ int main(void) {
     S = remake(next());
     DEBUG(S.size())
     LL ans = calc(S);
-    cout << ans << endl;
+    cout << max(0LL, ans) << endl;
 }

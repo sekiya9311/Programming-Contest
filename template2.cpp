@@ -62,8 +62,8 @@ const int MOD = INF + 7;
 const LL LLINF = 1e18;
 
 void solve(int testNum) {
-
-    cout << "Case #" << testNum << ": " <<  << endl;
+    stringstream ss;
+    cout << "Case #" << testNum << ": " << ss.str() << endl;
 }
 
 int main(void) {

@@ -25,6 +25,7 @@
 #include <tuple>
 #include <sstream>
 #include <fstream>
+#include <functional>
 
 using namespace std;
 #define REP(i, n) for (int (i) = 0; (i) < (n); (i)++)
@@ -61,7 +62,7 @@ const int MOD = INF + 7;
 const LL LLINF = 1e18;
 
 void solve(int testNum) {
-    
+
     cout << "Case #" << testNum << ": " <<  << endl;
 }
 

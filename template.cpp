@@ -25,6 +25,7 @@
 #include <tuple>
 #include <sstream>
 #include <fstream>
+#include <functional>
 
 using namespace std;
 #define REP(i, n) for (int (i) = 0; (i) < (n); (i)++)

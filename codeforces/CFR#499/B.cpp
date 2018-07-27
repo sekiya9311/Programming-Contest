@@ -65,18 +65,12 @@ int N, M;
 int a[111];
 VI cnt;
 
-int calc(int idx) {
+bool calc(int day) {
     int foo = 0;
-    VI cc = cnt;
-    while (true) {
-        REP(i, N) {
-            cc[i % idx]--;
-            if (cc[i % idx] < 0) {
-                return foo;
-            }
-        }
-        foo++;
+    FORE(e, cnt) {
+        foo += e / day;
     }
+    return foo >= N;
 }
 
 int main(void) {
@@ -88,13 +82,7 @@ int main(void) {
         FORE(e, mp) cnt.EB(e.second);
         RSORT(cnt);
     }
-    if (M < N) {
-        cout << 0 << endl;
-    } else {
-        int ans = 0;
-        REP(i, cnt.size()) {
-            chmax(ans, calc(i + 1));
-        }
-        cout << ans << endl;
-    }
+    int ans = 0;
+    while (calc(++ans)) {}
+    cout << ans - 1 << endl;
 }

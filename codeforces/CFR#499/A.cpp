@@ -69,12 +69,9 @@ int main(void) {
     int ans = INF;
     for (int i = 0; i < S.size(); i++) {
         string pre = string(1, S[i]);
-        for (int j = i + 1; j < S.size(); j++) {
+        for (int j = i + 1; j < S.size() && pre.size() < K; j++) {
             if (pre.back() + 1 < S[j]) {
                 pre += S[j];
-                if (pre.size() == K) {
-                    break;
-                }
             }
         }
         if (pre.size() == K) {

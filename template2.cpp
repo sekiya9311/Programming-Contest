@@ -52,7 +52,6 @@ template<typename T> using VT = vector<T>;
 #define REVERSE(a) reverse(ALL((a)))
 #define MP make_pair
 #define FORE(a, b) for (auto &&a : (b))
-#define FIND(s, e) ((s).find(e) != (s).end())
 #define EB emplace_back
 template<typename T>inline bool chmax(T &a,T b){if(a<b){a=b;return true;}return false;}
 template<typename T>inline bool chmin(T &a,T b){if(a>b){a=b;return true;}return false;}

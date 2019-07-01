@@ -92,22 +92,9 @@ void solve(int testNum) {
     }
     if (exists) {
 
-        int cnt = 0;
-        VT<tuple<int, int, LL>> edge;
-        REP(i, N) {
-            FOR(j, i + 1, N) {
-                if (G[i][j] < LLINF) {
-                    cnt++;
-                    edge.EB(i + 1, j + 1, G[i][j]);
-                }
-            }
-        }
-        ss << cnt << endl;
-        FORE(e, edge) {
-            int u, v;
-            LL cost;
-            tie(u, v, cost) = e;
-            ss << u << " " << v << " " << cost << endl;
+        ss << M << endl;
+        REP(i, M) {
+            ss << x[i] + 1 << " " << y[i] + 1 << " " << z[i] << endl;
         }
 
     } else {

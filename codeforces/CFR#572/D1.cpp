@@ -76,12 +76,9 @@ int main(void) {
     }
 
     REP(i, N) {
-        if (G[i].size() == 1) {
-            const int par = G[i][0];
-            if (G[par].size() == 2) {
-                cout << "NO" << endl;
-                return 0;
-            }
+        if (G[i].size() == 2) {
+            cout << "NO" << endl;
+            return 0;
         }
     }
     cout << "YES" << endl;

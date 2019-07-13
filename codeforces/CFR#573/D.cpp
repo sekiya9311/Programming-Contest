@@ -80,6 +80,13 @@ int main(void) {
         return 0;
     }
 
+    FOR(i, 1, N - 1) {
+        if (a[i] == a[i + 1] && a[i - 1] + 1 == a[i]) {
+            cout << CSL << endl;
+            return 0;
+        }
+    }
+
     LL cnt = a[0];
     a[0] = 0;
     REP(i, N - 1) {

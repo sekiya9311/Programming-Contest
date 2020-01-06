@@ -68,37 +68,19 @@ int mi[MAX], ma[MAX];
 int sum[MAX * 10];
 bool exists[MAX];
 
-void naive() {
-    int cnt = 0;
-    REP(i, N) {
-        REP(j, N) {
-            bool f = false;
-            int mi = INF;
-            FORE(e, S[i]) {
-                chmin(mi, e);
-                if (mi < e) {
-                    f = true;
-                }
-            }
-            FORE(e, S[j]) {
-                chmin(mi, e);
-                if (mi < e) {
-                    f = true;
-                }
-            }
-            if(f) {
-                cerr << i << " " << j << endl;
-            }
-            cnt += f;
+bool check(const VI &vec) {
+    int mi = INF;
+    FORE(e, vec) {
+        chmin(mi, e);
+        if (mi < e) {
+            return true;
         }
-        DEBUG(cnt)
     }
-    DEBUG(cnt)
+    return false;
 }
 
 int main(void) {
     scanf("%d", &N);
-    int already_cnt = 0;
     REP(i, N) {
         int l;
         scanf("%d", &l);
@@ -106,34 +88,29 @@ int main(void) {
         REP(j, l) {
             scanf("%d", &S[i][j]);
         }
-        mi[i] = *min_element(ALL(S[i]));
-        ma[i] = *max_element(ALL(S[i]));
+    }
 
-        int mi = INF;
-        FORE(e, S[i]) {
-            chmin(mi, e);
-            if (mi < e) {
-                exists[i] = true;
-                already_cnt++;
-            }
+    int all = 0;
+    LL ans = 0;
+    REP(i, N) {
+        if (check(S[i])) {
+            ans += N;
+            exists[i] = true;
+            all++;
+        } else {
+            const int ma = *max_element(ALL(S[i]));
+            sum[ma]++;
         }
     }
-//naive();
-    REP(i, N) if (!exists[i]) {
-        sum[ma[i]]++;
-    }
+
     REP(i, MAX * 10 - 1) {
         sum[i + 1] += sum[i];
     }
 
-    LL ans = 0;
-    REP(i, N) {
-        if (exists[i]) {
-            ans += N;
-        } else {
-            auto cur = sum[MAX * 10 - 1] - sum[mi[i]] + already_cnt;
-            ans += cur;
-        }
+    REP(i, N) if (!exists[i]) {
+        const int mi = *min_element(ALL(S[i]));
+        const auto cur = sum[MAX * 10 - 1] - sum[mi] + all;
+        ans += cur;
     }
 
     cout << ans << endl;

@@ -61,9 +61,7 @@ const int INF = 1e9;
 const int MOD = INF + 7;
 const LL LLINF = 1e18;
 
-void solve(int testNum) {
-    stringstream ss;
-    cout << "Case #" << testNum << ": " << ss.str() << endl;
+void solve(stringstream &out) {
 }
 
 int main(void) {
@@ -71,11 +69,14 @@ int main(void) {
         cerr << "file open failed" << endl;
         exit(1);
     }
-    int problemnum;
-    scanf("%d", &problemnum);
+
+    int problem_count;
+    scanf("%d", &problem_count);
     //string s;getline(cin, s);
-    for (int testNum = 1; testNum <= problemnum; testNum++) {
-        solve(testNum);
-        cerr << "Case #" << testNum << ": solved" << endl;
+    for (int test_no = 1; test_no <= problem_count; test_no++) {
+        stringstream out;
+        solve(out);
+        printf("Case #%d: %s", test_no, out.str().c_str());
+        cerr << "Case #" << test_no << ": solved" << endl;
     }
 }

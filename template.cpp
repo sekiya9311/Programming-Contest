@@ -61,5 +61,21 @@ const int INF = 1e9;
 const int MOD = INF + 7;
 const LL LLINF = 1e18;
 
+void solve() {
+}
+
 int main(void) {
+#ifndef ONLINE_JUDGE
+    const auto in_stream = freopen("../in.txt", "r", stdin);
+    if (in_stream == nullptr) {
+        cerr << "ERROR!" << endl;
+        return 1;
+    }
+#endif
+
+    solve();
+
+#ifndef ONLINE_JUDGE
+    fclose(in_stream);
+#endif
 }

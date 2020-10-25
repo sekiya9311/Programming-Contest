@@ -53,7 +53,7 @@ template<typename T> using VT = vector<T>;
 #define MP make_pair
 #define FORE(a, b) for (auto &&a : (b))
 #define EB emplace_back
-#define GREATER(T) T, VT<T> greater<T>
+#define GREATER(T) T, VT<T>, greater<T>
 template<typename T>inline bool chmax(T &a,T b){if(a<b){a=b;return true;}return false;}
 template<typename T>inline bool chmin(T &a,T b){if(a>b){a=b;return true;}return false;}
 
